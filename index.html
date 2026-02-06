@@ -10,14 +10,20 @@
   <style>
     :root{
       --bg:#050712;
-      --stroke:rgba(255,255,255,.14);
+      --panel:rgba(255,255,255,.045);
+      --panel2:rgba(255,255,255,.03);
+      --stroke:rgba(255,255,255,.12);
       --stroke2:rgba(120,240,255,.22);
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.72);
-      --radius:22px;
-      --shadow:0 20px 70px rgba(0,0,0,.45);
-      --cyan:rgba(120,240,255,.55);
-      --mint:rgba(80,255,180,.30);
+
+      --cyan: rgba(120,240,255,.95);
+      --mint: rgba(80,255,180,.90);
+
+      --radius:26px;
+      --radius2:22px;
+      --shadow: 0 20px 70px rgba(0,0,0,.48);
+      --shadow2: 0 10px 40px rgba(0,0,0,.38);
     }
 
     *{box-sizing:border-box}
@@ -27,281 +33,419 @@
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       color:var(--text);
       background:
-        radial-gradient(1100px 700px at 65% 15%, rgba(120,240,255,.18), transparent 55%),
-        radial-gradient(900px 600px at 25% 80%, rgba(80,255,180,.10), transparent 55%),
-        linear-gradient(rgba(5,7,18,.88), rgba(5,7,18,.92)),
+        radial-gradient(1100px 720px at 70% 10%, rgba(120,240,255,.18), transparent 55%),
+        radial-gradient(900px 640px at 20% 85%, rgba(80,255,180,.10), transparent 55%),
+        linear-gradient(rgba(5,7,18,.86), rgba(5,7,18,.92)),
         url("space-overlay.jpg") center/cover no-repeat,
         var(--bg);
       overflow-x:hidden;
     }
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
     .wrap{max-width:1180px;margin:0 auto;padding:22px}
 
-    /* NAV */
+    /* ---------- Topbar ---------- */
     .topbar{
-      position:sticky;top:14px;z-index:10;
+      position:sticky;top:14px;z-index:20;
       display:flex;justify-content:space-between;align-items:center;
+      gap:14px;
       padding:12px 16px;
       border-radius:999px;
-      border:1px solid var(--stroke2);
-      background:rgba(255,255,255,.06);
-      backdrop-filter:blur(12px);
+      border:1px solid rgba(120,240,255,.22);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow2);
     }
-    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:.2px}
     .brand img{
       width:34px;height:34px;border-radius:50%;
-      box-shadow:0 0 16px rgba(120,240,255,.4)
+      object-fit:cover;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 0 18px rgba(120,240,255,.25);
     }
-    .navlinks{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-    .navlinks a{font-weight:700;font-size:14px;opacity:.85}
+    .navlinks{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+    .navlinks a{font-weight:800;font-size:14px;opacity:.85}
     .navlinks a:hover{opacity:1}
     .cta-x{
       padding:10px 14px;border-radius:999px;
-      border:1px solid rgba(120,240,255,.3);
-      background:linear-gradient(90deg, rgba(120,240,255,.18), rgba(80,255,180,.1));
-      font-weight:900;
+      border:1px solid rgba(120,240,255,.30);
+      background:linear-gradient(90deg, rgba(120,240,255,.16), rgba(80,255,180,.10));
+      font-weight:950;
+      opacity:1 !important;
     }
 
-    /* SECTION BASE */
-    .section{
+    /* ---------- Premium panel base ---------- */
+    .panel{
       margin-top:18px;
       border-radius:var(--radius);
       border:1px solid rgba(120,240,255,.16);
-      background:rgba(255,255,255,.04);
-      box-shadow:var(--shadow);
-      padding:22px;
+      background:linear-gradient(180deg, var(--panel), var(--panel2));
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
       position:relative;
       overflow:hidden;
     }
-    .section h2{margin:0 0 12px}
+    .panel::before{
+      content:"";
+      position:absolute;inset:-2px;
+      background:
+        radial-gradient(900px 280px at 25% 10%, rgba(120,240,255,.10), transparent 62%),
+        radial-gradient(900px 280px at 75% 30%, rgba(80,255,180,.08), transparent 62%);
+      pointer-events:none;
+    }
+    .panelInner{position:relative;z-index:1;padding:22px}
 
-    /* STORY (Father -> Baby connector) */
+    /* ---------- Story / Father->Baby aura ---------- */
     .story{
       text-align:center;
+      margin:0;
       font-size:16px;
       line-height:1.65;
-      color:rgba(255,255,255,.88);
+      color:rgba(255,255,255,.86);
       position:relative;
-      margin:0;
+    }
+    .storyAura{
+      position:absolute;
+      left:50%;
+      bottom:-22px;
+      width:min(720px, 86vw);
+      height:90px;
+      transform:translateX(-50%);
+      pointer-events:none;
+      opacity:.9;
+      background:
+        radial-gradient(closest-side at 50% 40%, rgba(120,240,255,.22), transparent 70%),
+        radial-gradient(closest-side at 35% 50%, rgba(80,255,180,.14), transparent 72%),
+        radial-gradient(closest-side at 65% 55%, rgba(120,240,255,.10), transparent 75%);
+      filter: blur(1px);
+      animation: mistBreath 7.5s ease-in-out infinite;
     }
     .storyBeam{
       position:absolute;
       left:50%;
       bottom:-18px;
-      width:2px;
-      height:70px;
+      width:2px;height:64px;
       transform:translateX(-50%);
-      background:linear-gradient(to bottom, rgba(120,240,255,.65), rgba(80,255,180,.25), transparent);
-      filter:drop-shadow(0 0 10px rgba(120,240,255,.25));
-      animation:auraBeam 6s ease-in-out infinite;
+      background:linear-gradient(to bottom, rgba(120,240,255,.55), rgba(80,255,180,.18), transparent);
+      filter: drop-shadow(0 0 10px rgba(120,240,255,.25));
+      opacity:.65;
+      animation: beamPulse 6s ease-in-out infinite;
       pointer-events:none;
     }
-    .storyRing{
-      position:absolute;
-      left:50%;
-      bottom:-34px;
-      width:140px;
-      height:60px;
-      transform:translateX(-50%);
-      background:radial-gradient(closest-side, rgba(120,240,255,.25), transparent 70%);
-      filter:blur(1px);
-      opacity:.7;
-      animation:auraRing 7s ease-in-out infinite;
-      pointer-events:none;
+    @keyframes mistBreath{
+      0%{opacity:.55; transform:translateX(-50%) scale(.98)}
+      50%{opacity:.95; transform:translateX(-50%) scale(1.02)}
+      100%{opacity:.55; transform:translateX(-50%) scale(.98)}
     }
-    @keyframes auraBeam{
+    @keyframes beamPulse{
       0%{opacity:.25}
       50%{opacity:.85}
       100%{opacity:.25}
     }
-    @keyframes auraRing{
-      0%{opacity:.35; transform:translateX(-50%) scale(.96)}
-      50%{opacity:.75; transform:translateX(-50%) scale(1.03)}
-      100%{opacity:.35; transform:translateX(-50%) scale(.96)}
-    }
 
-    /* HERO */
+    /* ---------- Hero ---------- */
     .hero{
       margin-top:18px;
-      border-radius:var(--radius);
+      border-radius: calc(var(--radius) + 2px);
       border:1px solid rgba(120,240,255,.18);
-      background:rgba(255,255,255,.04);
-      box-shadow:var(--shadow);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
+    /* organic “blob” + vignette */
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(900px 520px at 72% 35%, rgba(120,240,255,.14), transparent 58%),
+        radial-gradient(760px 520px at 30% 65%, rgba(80,255,180,.09), transparent 60%),
+        radial-gradient(520px 420px at 50% 35%, rgba(255,255,255,.04), transparent 65%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 540px at 72% 45%, transparent 55%, rgba(0,0,0,.34) 78%),
+        radial-gradient(900px 640px at 20% 55%, transparent 52%, rgba(0,0,0,.30) 80%);
+      pointer-events:none;
+    }
+
     .heroGrid{
+      position:relative;z-index:1;
       display:grid;
-      grid-template-columns:1.05fr .95fr;
+      grid-template-columns: 1.05fr .95fr;
       gap:18px;
       padding:22px;
       align-items:stretch;
     }
 
-    .heroLeft h1{margin:0;font-size:54px;line-height:1}
-    .ticker{
-      font-size:54px;
-      font-weight:1000;
-      background:linear-gradient(90deg,#7cf0ff,#50ffb4);
-      -webkit-background-clip:text;
-      color:transparent;
-      margin-top:8px;
-    }
-    .sub{color:var(--muted);margin:14px 0 18px;max-width:60ch}
-
-    .btnRow{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-    .btn{
-      padding:12px 18px;
-      border-radius:14px;
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.22);
+      color:rgba(255,255,255,.82);
       font-weight:900;
-      border:1px solid rgba(255,255,255,.2);
-      background:rgba(255,255,255,.06);
-      transition:.15s transform,.15s opacity;
-      display:inline-block;
+      font-size:13px;
+      margin-bottom:14px;
     }
-    .btn:hover{transform:translateY(-1px)}
+    .kicker .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(120,240,255,.75) 55%, rgba(20,120,255,.5));
+      box-shadow:0 0 18px rgba(120,240,255,.35);
+    }
+
+    .heroLeft h1{margin:0;font-size:56px;letter-spacing:-1px;line-height:1.02}
+    .ticker{
+      display:block;
+      margin-top:10px;
+      font-size:56px;
+      font-weight:1000;
+      letter-spacing:-1px;
+      background:linear-gradient(90deg, rgba(120,240,255,1), rgba(80,255,180,.9));
+      -webkit-background-clip:text;background-clip:text;
+      color:transparent;
+    }
+    .sub{
+      margin:14px 0 18px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+      max-width:60ch;
+    }
+
+    .btnRow{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 18px;
+      border-radius:16px;
+      font-weight:950;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.92);
+      transition:.16s transform,.16s background,.16s border,.16s filter;
+      user-select:none;
+      cursor:pointer;
+      min-width:140px;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22)}
     .btn.primary{
-      border-color:rgba(120,240,255,.35);
-      background:linear-gradient(90deg, rgba(120,240,255,.25), rgba(80,255,180,.18));
+      border-color:rgba(120,240,255,.30);
+      background:linear-gradient(90deg, rgba(120,240,255,.24), rgba(80,255,180,.14));
+      box-shadow:0 0 0 7px rgba(120,240,255,.07), 0 18px 55px rgba(120,240,255,.12);
+    }
+    .btn.ghost{
+      background:rgba(0,0,0,.18);
+      border-color:rgba(120,240,255,.18);
     }
 
     .caBar{
-      display:flex;justify-content:space-between;align-items:center;
-      gap:12px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
       padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(120,240,255,.24);
-      background:rgba(0,0,0,.3);
-      font-family:monospace;
+      border-radius:18px;
+      border:1px solid rgba(120,240,255,.22);
+      background:linear-gradient(180deg, rgba(0,0,0,.34), rgba(0,0,0,.18));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+      max-width:760px;
+      position:relative;
+      overflow:hidden;
+    }
+    /* subtle scanline */
+    .caBar::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,.04) 0px,
+          rgba(255,255,255,.04) 1px,
+          transparent 2px,
+          transparent 7px
+        );
+      opacity:.07;
+      pointer-events:none;
+      animation: scan 6.5s linear infinite;
+    }
+    @keyframes scan{
+      from{transform:translateY(-10px)}
+      to{transform:translateY(10px)}
+    }
+
+    .caLeft{display:flex;align-items:center;gap:12px;min-width:0;position:relative;z-index:1}
+    .caLabel{display:block;color:rgba(255,255,255,.62);font-weight:850;font-size:12px;margin-bottom:2px}
+    .caText{
+      min-width:0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      color:rgba(255,255,255,.85);
       font-size:13px;
+      line-height:1.35;
       word-break:break-all;
     }
     .copyBtn{
-      padding:10px 14px;
-      border-radius:12px;
-      border:1px solid rgba(120,240,255,.3);
+      position:relative;z-index:1;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:14px;
+      border:1px solid rgba(120,240,255,.26);
       background:rgba(255,255,255,.05);
-      font-weight:900;
+      color:rgba(255,255,255,.92);
+      font-weight:950;
       cursor:pointer;
+      transition:.16s transform,.16s background,.16s border;
+      flex:0 0 auto;
+    }
+    .copyBtn:hover{transform:translateY(-1px);background:rgba(255,255,255,.07);border-color:rgba(120,240,255,.40)}
+    .copyBtn:active{transform:translateY(0)}
+    .copyBtn.success{
+      border-color: rgba(80,255,180,.35);
+      box-shadow:0 0 0 7px rgba(80,255,180,.08);
     }
 
-    /* HERO IMAGE + GLOW + FAMILY AURA */
+    /* Hero image container */
     .heroRight{
       position:relative;
-      border-radius:20px;
-      overflow:hidden;
+      border-radius:24px;
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.25);
+      overflow:hidden;
+      background:rgba(0,0,0,.20);
+      box-shadow: 0 18px 55px rgba(0,0,0,.38);
     }
-    /* subtle aura field behind whale (father->baby vibe) */
+    /* “family aura” around image */
     .heroRight::before{
       content:"";
-      position:absolute;
-      inset:-20%;
+      position:absolute; inset:-22%;
       background:
-        radial-gradient(circle at 55% 45%,
-          rgba(120,240,255,.28),
-          rgba(80,255,180,.14),
-          transparent 65%);
-      opacity:.55;
-      animation:auraPulse 7.5s ease-in-out infinite;
+        radial-gradient(circle at 55% 50%, rgba(120,240,255,.26), rgba(80,255,180,.13), transparent 64%);
+      opacity:.65;
+      animation:auraPulse 7.8s ease-in-out infinite;
       pointer-events:none;
+      z-index:1;
     }
-    /* soft arc that feels like a “connection” */
+    /* gentle arc connection */
     .heroRight::after{
       content:"";
       position:absolute;
-      left:-15%;
-      top:10%;
-      width:140%;
-      height:120%;
+      left:-18%;
+      top:8%;
+      width:150%;
+      height:130%;
       border-radius:50%;
       border:1px solid rgba(120,240,255,.10);
       box-shadow:
         0 0 25px rgba(120,240,255,.08),
-        0 0 60px rgba(80,255,180,.06);
+        0 0 70px rgba(80,255,180,.06);
       opacity:.55;
       transform:rotate(-10deg);
-      animation:auraArc 9s ease-in-out infinite;
+      animation:auraArc 9.2s ease-in-out infinite;
       pointer-events:none;
+      z-index:1;
     }
 
     .heroRight img{
+      position:relative;z-index:0;
       width:100%;
       height:100%;
-      min-height:480px;
+      min-height:520px;
       object-fit:cover;
       object-position:38% 50%;
+
       filter:
         saturate(1.12)
         contrast(1.08)
-        drop-shadow(0 0 22px rgba(120,240,255,.25))
-        drop-shadow(0 0 48px rgba(80,255,180,.15));
+        drop-shadow(0 0 22px rgba(120,240,255,.22))
+        drop-shadow(0 0 52px rgba(80,255,180,.16));
+
       animation:
         float 7s ease-in-out infinite,
         whaleGlow 5.5s ease-in-out infinite;
+      transform:scale(1.02);
     }
 
     @keyframes float{
-      0%{transform:translateY(0) scale(1.01)}
-      50%{transform:translateY(-10px) scale(1.02)}
-      100%{transform:translateY(0) scale(1.01)}
+      0%{transform:translateY(0) scale(1.02)}
+      50%{transform:translateY(-10px) scale(1.03)}
+      100%{transform:translateY(0) scale(1.02)}
     }
     @keyframes whaleGlow{
       0%{
         filter:
           saturate(1.12)
           contrast(1.08)
-          drop-shadow(0 0 18px rgba(120,240,255,.22))
+          drop-shadow(0 0 18px rgba(120,240,255,.20))
           drop-shadow(0 0 40px rgba(80,255,180,.12));
       }
       50%{
         filter:
           saturate(1.18)
           contrast(1.10)
-          drop-shadow(0 0 32px rgba(120,240,255,.38))
-          drop-shadow(0 0 64px rgba(80,255,180,.22));
+          drop-shadow(0 0 34px rgba(120,240,255,.36))
+          drop-shadow(0 0 66px rgba(80,255,180,.22));
       }
       100%{
         filter:
           saturate(1.12)
           contrast(1.08)
-          drop-shadow(0 0 18px rgba(120,240,255,.22))
+          drop-shadow(0 0 18px rgba(120,240,255,.20))
           drop-shadow(0 0 40px rgba(80,255,180,.12));
       }
     }
     @keyframes auraPulse{
       0%{opacity:.35; transform:scale(.96)}
-      50%{opacity:.65; transform:scale(1.02)}
+      50%{opacity:.70; transform:scale(1.02)}
       100%{opacity:.35; transform:scale(.96)}
     }
     @keyframes auraArc{
-      0%{opacity:.28; transform:rotate(-10deg) translateY(0)}
+      0%{opacity:.26; transform:rotate(-10deg) translateY(0)}
       50%{opacity:.55; transform:rotate(-12deg) translateY(-6px)}
-      100%{opacity:.28; transform:rotate(-10deg) translateY(0)}
+      100%{opacity:.26; transform:rotate(-10deg) translateY(0)}
     }
 
-    /* GRIDS */
-    .steps,.cards{
+    /* ---------- Section titles ---------- */
+    .sectionTitle{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+      margin-bottom:14px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size:28px;
+      letter-spacing:-.5px;
+    }
+    .sectionTitle small{color:var(--muted);font-weight:850}
+
+    /* ---------- Cards/Steps ---------- */
+    .grid3{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:14px;
     }
-    .step,.card{
-      border-radius:18px;
+    .card{
+      border-radius:22px;
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.25);
-      padding:14px;
-      color:rgba(255,255,255,.86);
+      background:rgba(0,0,0,.20);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+      min-height:120px;
     }
+    .card::before{
+      content:"";
+      position:absolute;inset:-2px;
+      background: radial-gradient(420px 160px at 25% 10%, rgba(120,240,255,.12), transparent 65%);
+      pointer-events:none;
+    }
+    .card > *{position:relative;z-index:1}
+    .card strong{display:block;margin-bottom:6px;font-size:14px;letter-spacing:-.2px}
+    .card p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
 
-    /* DEX EMBED */
+    /* ---------- Dex embed ---------- */
     .embedWrap{
-      border-radius:18px;
+      border-radius:22px;
       overflow:hidden;
       border:1px solid rgba(120,240,255,.22);
       background:rgba(0,0,0,.28);
+      box-shadow: var(--shadow2);
     }
     .embedWrap iframe{
       width:100%;
@@ -310,29 +454,32 @@
       display:block;
     }
 
-    /* LINKS */
-    .linksRow{display:flex;gap:12px;flex-wrap:wrap}
+    /* ---------- Links ---------- */
+    .linkRow{display:flex;gap:10px;flex-wrap:wrap}
     .chip{
+      display:inline-flex;align-items:center;gap:10px;
       padding:10px 14px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.05);
-      font-weight:900;
-      display:inline-block;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      font-weight:950;
+      color:rgba(255,255,255,.86);
+      transition:.16s transform,.16s background,.16s border;
     }
+    .chip:hover{transform:translateY(-1px);background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.22)}
     .chip.primary{
-      border-color:rgba(120,240,255,.3);
-      background:linear-gradient(90deg, rgba(120,240,255,.2), rgba(80,255,180,.12));
+      border-color:rgba(120,240,255,.28);
+      background:linear-gradient(90deg, rgba(120,240,255,.14), rgba(80,255,180,.08));
     }
 
     .footer{
       margin-top:14px;
       font-size:12.5px;
-      color:rgba(255,255,255,.6);
-      line-height:1.6;
+      color:rgba(255,255,255,.62);
+      line-height:1.65;
     }
 
-    /* TOAST */
+    /* ---------- Toast ---------- */
     .toast{
       position:fixed;
       left:50%;
@@ -342,168 +489,232 @@
       border-radius:999px;
       border:1px solid rgba(120,240,255,.22);
       background:rgba(0,0,0,.55);
-      backdrop-filter:blur(10px);
+      backdrop-filter: blur(10px);
       opacity:0;
       pointer-events:none;
       transition:.18s opacity,.18s transform;
-      font-weight:900;
-      z-index:50;
+      font-weight:950;
+      z-index:80;
     }
     .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
 
-    @media(max-width:980px){
+    /* ---------- Responsive ---------- */
+    @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
-      .steps,.cards{grid-template-columns:1fr}
-      .heroLeft h1,.ticker{font-size:42px}
+      .heroRight img{min-height:380px}
+      .heroLeft h1,.ticker{font-size:44px}
+      .grid3{grid-template-columns:1fr}
+      .embedWrap iframe{height:560px}
+      .storyBeam,.storyAura{display:none}
+    }
+    @media (max-width: 520px){
+      .heroLeft h1,.ticker{font-size:38px}
+      .btn{min-width:0;flex:1}
+      .caBar{flex-direction:column;align-items:stretch}
+      .copyBtn{justify-content:center}
       .embedWrap iframe{height:520px}
-      .storyBeam,.storyRing{display:none}
     }
   </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="wrap">
 
-  <header class="topbar">
-    <div class="brand">
-      <img src="logo.jpg" alt="Baby White Whale logo">
-      Baby White Whale
-    </div>
-    <nav class="navlinks">
-      <a href="#how">How to Buy</a>
-      <a href="#tokenomics">Tokenomics</a>
-      <a href="#chart">Chart</a>
-      <a href="#links">Links</a>
-      <a class="cta-x" href="https://x.com/babywhitewhale" target="_blank" rel="noreferrer">X</a>
-    </nav>
-  </header>
+    <header class="topbar">
+      <div class="brand">
+        <img src="logo.jpg" alt="Baby White Whale logo">
+        Baby White Whale
+      </div>
 
-  <!-- STORY -->
-  <section class="section">
-    <p class="story">
-      <strong>Baby White Whale</strong> is part of the whale family — inspired by the legacy of
-      <strong>The White Whale ($WHALE)</strong>, a well-known memecoin that made waves in the crypto space.
-      While the bigger whale created the tide, Baby White Whale brings a new generation of
-      community-driven fun on Solana.
-    </p>
-    <div class="storyRing" aria-hidden="true"></div>
-    <div class="storyBeam" aria-hidden="true"></div>
-  </section>
+      <nav class="navlinks">
+        <a href="#how">How to Buy</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#chart">Chart</a>
+        <a href="#links">Links</a>
+        <a class="cta-x" href="https://x.com/babywhitewhale" target="_blank" rel="noreferrer">X</a>
+      </nav>
+    </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="heroGrid">
-      <div class="heroLeft">
-        <h1>Baby White Whale</h1>
-        <div class="ticker">$BWW</div>
-
-        <p class="sub">
-          The smallest whale with the biggest waves — a community-driven memecoin on Solana.
+    <!-- Story / Father -->
+    <section class="panel">
+      <div class="panelInner">
+        <p class="story">
+          <strong>Baby White Whale</strong> is part of the whale family — inspired by the legacy of
+          <strong>The White Whale ($WHALE)</strong>, a well-known memecoin that made waves in the crypto space.
+          While the bigger whale created the tide, Baby White Whale brings a new generation of
+          community-driven fun on Solana.
+          <span class="storyAura" aria-hidden="true"></span>
+          <span class="storyBeam" aria-hidden="true"></span>
         </p>
+      </div>
+    </section>
 
-        <div class="btnRow">
-          <a class="btn primary"
-             href="https://jup.ag/swap/SOL-5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump"
-             target="_blank" rel="noreferrer">Buy Now</a>
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="heroGrid">
+        <div class="heroLeft">
+          <div class="kicker"><span class="dot"></span> Solana memecoin • community-driven</div>
 
-          <a class="btn"
-             href="https://jup.ag/swap/SOL-5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump"
-             target="_blank" rel="noreferrer">Buy</a>
+          <h1>Baby White Whale</h1>
+          <span class="ticker">$BWW</span>
 
-          <a class="btn"
-             href="https://dexscreener.com/solana/3wj1am4mvx2ch4zxfykemjqjgerjbmdpj7jodkgziqbr"
-             target="_blank" rel="noreferrer">Chart</a>
+          <p class="sub">
+            The smallest whale with the biggest waves — a community-driven memecoin on Solana.
+          </p>
+
+          <div class="btnRow">
+            <a class="btn primary"
+               href="https://jup.ag/swap/SOL-5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump"
+               target="_blank" rel="noreferrer">Buy Now</a>
+
+            <a class="btn"
+               href="https://jup.ag/swap/SOL-5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump"
+               target="_blank" rel="noreferrer">Buy</a>
+
+            <a class="btn ghost"
+               href="https://dexscreener.com/solana/3wj1am4mvx2ch4zxfykemjqjgerjbmdpj7jodkgziqbr"
+               target="_blank" rel="noreferrer">Chart</a>
+          </div>
+
+          <div class="caBar">
+            <div class="caLeft">
+              <div class="caText">
+                <span class="caLabel">Contract (Solana)</span>
+                <span id="caText">5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump</span>
+              </div>
+            </div>
+
+            <button class="copyBtn" id="copyBtn" type="button">Copy</button>
+          </div>
         </div>
 
-        <div class="caBar">
-          <span id="caText">5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump</span>
-          <button class="copyBtn" id="copyBtn" type="button">Copy</button>
+        <div class="heroRight">
+          <img src="hero.jpg" alt="Baby White Whale hero image">
         </div>
       </div>
+    </section>
 
-      <div class="heroRight">
-        <img src="hero.jpg" alt="Baby White Whale hero image">
+    <!-- How to Buy -->
+    <section class="panel" id="how">
+      <div class="panelInner">
+        <div class="sectionTitle">
+          <h2>How to Buy</h2>
+          <small>3 steps</small>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <strong>1) Get a Wallet</strong>
+            <p>Install a Solana wallet (Phantom / Solflare) and keep your seed phrase safe.</p>
+          </div>
+          <div class="card">
+            <strong>2) Buy SOL</strong>
+            <p>Buy SOL on an exchange and send it to your wallet address.</p>
+          </div>
+          <div class="card">
+            <strong>3) Swap for $BWW</strong>
+            <p>Swap SOL → $BWW on Jupiter using the official contract address.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- HOW TO BUY -->
-  <section class="section" id="how">
-    <h2>How to Buy</h2>
-    <div class="steps">
-      <div class="step">Install a Solana wallet (Phantom / Solflare).</div>
-      <div class="step">Buy SOL and send it to your wallet.</div>
-      <div class="step">Swap SOL → $BWW on Jupiter.</div>
-    </div>
-  </section>
+    <!-- Tokenomics -->
+    <section class="panel" id="tokenomics">
+      <div class="panelInner">
+        <div class="sectionTitle">
+          <h2>Tokenomics</h2>
+          <small>simple & clean</small>
+        </div>
 
-  <!-- TOKENOMICS -->
-  <section class="section" id="tokenomics">
-    <h2>Tokenomics</h2>
-    <div class="cards">
-      <div class="card">Chain: Solana</div>
-      <div class="card">Total Supply: 1,000,000,000</div>
-      <div class="card">Tax: 0%</div>
-    </div>
-  </section>
+        <div class="grid3">
+          <div class="card">
+            <strong>Chain</strong>
+            <p>Solana (SPL)</p>
+          </div>
+          <div class="card">
+            <strong>Total Supply</strong>
+            <p>1,000,000,000</p>
+          </div>
+          <div class="card">
+            <strong>Tax</strong>
+            <p>0%</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- DEXSCREENER -->
-  <section class="section" id="chart">
-    <h2>Live Chart (Dexscreener)</h2>
-    <div class="embedWrap">
-      <iframe
-        src="https://dexscreener.com/solana/3wj1am4mvx2ch4zxfykemjqjgerjbmdpj7jodkgziqbr?embed=1&theme=dark"
-        title="Dexscreener Chart - Baby White Whale"
-        loading="lazy"
-        allow="clipboard-write; fullscreen"
-      ></iframe>
-    </div>
-  </section>
+    <!-- Dexscreener chart -->
+    <section class="panel" id="chart">
+      <div class="panelInner">
+        <div class="sectionTitle">
+          <h2>Live Chart (Dexscreener)</h2>
+          <small>embedded</small>
+        </div>
 
-  <!-- LINKS -->
-  <section class="section" id="links">
-    <h2>Official Links</h2>
-    <div class="linksRow">
-      <a class="chip primary" href="https://x.com/babywhitewhale" target="_blank" rel="noreferrer">X (Twitter)</a>
-      <a class="chip" href="https://jup.ag/swap/SOL-5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump" target="_blank" rel="noreferrer">Buy on Jupiter</a>
-      <a class="chip" href="https://dexscreener.com/solana/3wj1am4mvx2ch4zxfykemjqjgerjbmdpj7jodkgziqbr" target="_blank" rel="noreferrer">Dexscreener</a>
-    </div>
+        <div class="embedWrap">
+          <iframe
+            src="https://dexscreener.com/solana/3wj1am4mvx2ch4zxfykemjqjgerjbmdpj7jodkgziqbr?embed=1&theme=dark"
+            title="Dexscreener Chart - Baby White Whale"
+            loading="lazy"
+            allow="clipboard-write; fullscreen"
+          ></iframe>
+        </div>
+      </div>
+    </section>
 
-    <div class="footer">
-      <b>Disclaimer:</b> Baby White Whale is a memecoin with no intrinsic value or expectation of financial return.
-      Crypto is risky — never invest more than you can afford to lose.
-    </div>
-  </section>
+    <!-- Links -->
+    <section class="panel" id="links">
+      <div class="panelInner">
+        <div class="sectionTitle">
+          <h2>Official Links</h2>
+          <small>stay safe</small>
+        </div>
 
-</div>
+        <div class="linkRow">
+          <a class="chip primary" href="https://x.com/babywhitewhale" target="_blank" rel="noreferrer">X (Twitter)</a>
+          <a class="chip" href="https://jup.ag/swap/SOL-5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump" target="_blank" rel="noreferrer">Buy on Jupiter</a>
+          <a class="chip" href="https://dexscreener.com/solana/3wj1am4mvx2ch4zxfykemjqjgerjbmdpj7jodkgziqbr" target="_blank" rel="noreferrer">Dexscreener</a>
+        </div>
 
-<div class="toast" id="toast">Copied ✅</div>
+        <div class="footer">
+          <b>Disclaimer:</b> Baby White Whale is a memecoin with no intrinsic value or expectation of financial return.
+          Crypto is risky — never invest more than you can afford to lose. Always verify the contract address.
+        </div>
+      </div>
+    </section>
 
-<script>
-  const CA = "5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump";
-  const toast = document.getElementById("toast");
+  </div>
 
-  function showToast(msg){
-    toast.textContent = msg;
-    toast.classList.add("show");
-    setTimeout(()=> toast.classList.remove("show"), 1200);
-  }
+  <div class="toast" id="toast">Copied!</div>
 
-  document.getElementById("copyBtn").addEventListener("click", async () => {
-    try{
-      await navigator.clipboard.writeText(CA);
-      showToast("CA copied ✅");
-    }catch(e){
-      const t = document.createElement("textarea");
-      t.value = CA;
-      document.body.appendChild(t);
-      t.select();
-      document.execCommand("copy");
-      t.remove();
-      showToast("CA copied ✅");
+  <script>
+    const CA = "5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump";
+    const toast = document.getElementById("toast");
+    const copyBtn = document.getElementById("copyBtn");
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(()=> toast.classList.remove("show"), 1200);
     }
-  });
-</script>
 
+    copyBtn.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(CA);
+      }catch(e){
+        const t = document.createElement("textarea");
+        t.value = CA;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand("copy");
+        t.remove();
+      }
+
+      copyBtn.classList.add("success");
+      showToast("CA copied ✅");
+      setTimeout(()=> copyBtn.classList.remove("success"), 900);
+    });
+  </script>
 </body>
 </html>

@@ -6,13 +6,19 @@
   <title>Baby White Whale — $BWW</title>
   <meta name="description" content="Baby White Whale ($BWW) — Solana memecoin. Buy on Jupiter, view chart on Dexscreener, and copy the contract address." />
   <meta name="theme-color" content="#050712" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  <!-- FAVICONS -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=5">
 
   <style>
     :root{
       --bg:#050712;
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.72);
+
+      --stroke:rgba(255,255,255,.12);
+      --stroke2:rgba(120,240,255,.20);
 
       --panelA:rgba(255,255,255,.06);
       --panelB:rgba(255,255,255,.03);
@@ -21,6 +27,7 @@
       --shadow2:0 10px 40px rgba(0,0,0,.35);
 
       --r1:28px;
+      --r2:20px;
     }
 
     *{box-sizing:border-box}
@@ -41,6 +48,7 @@
 
     a{color:inherit;text-decoration:none}
     .wrap{max-width:1180px;margin:0 auto;padding:22px}
+    img{max-width:100%;display:block}
 
     /* ---------- topbar ---------- */
     .topbar{
@@ -60,7 +68,6 @@
       object-fit:cover;
       border:1px solid rgba(255,255,255,.16);
       box-shadow:0 0 18px rgba(120,240,255,.22);
-      display:block;
     }
     .navlinks{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end}
     .navlinks a{font-weight:850;font-size:14px;opacity:.85}
@@ -73,7 +80,7 @@
       opacity:1 !important;
     }
 
-    /* ---------- generic panel ---------- */
+    /* ---------- panels ---------- */
     .panel{
       margin-top:18px;
       border-radius:var(--r1);
@@ -81,8 +88,8 @@
       background:linear-gradient(180deg, var(--panelA), var(--panelB));
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
-      overflow:hidden;
       position:relative;
+      overflow:hidden;
     }
     .panel::before{
       content:"";
@@ -94,9 +101,11 @@
     }
     .panelInner{position:relative;z-index:1;padding:22px}
 
+    /* ---------- story pill ---------- */
     .storyWrap{padding:18px 22px}
     .story{
-      margin:0;text-align:center;
+      margin:0;
+      text-align:center;
       color:rgba(255,255,255,.85);
       line-height:1.7;
       font-size:15.5px;
@@ -303,6 +312,7 @@
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
     }
 
+    /* ---------- section titles + grids ---------- */
     .titleRow{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
     .titleRow h2{margin:0;font-size:28px;letter-spacing:-.5px}
     .titleRow small{color:var(--muted);font-weight:850}
@@ -326,6 +336,7 @@
     .card > *{position:relative;z-index:1}
     .card strong{display:block;margin-bottom:6px;font-size:14px}
 
+    /* Dex embed */
     .embedWrap{
       border-radius:22px;
       overflow:hidden;
@@ -335,6 +346,7 @@
     }
     .embedWrap iframe{width:100%;height:640px;border:0;display:block}
 
+    /* Links */
     .linkRow{display:flex;gap:10px;flex-wrap:wrap}
     .chip{
       display:inline-flex;align-items:center;gap:10px;
@@ -354,6 +366,7 @@
 
     .footer{margin-top:14px;font-size:12.5px;color:rgba(255,255,255,.62);line-height:1.65}
 
+    /* Toast */
     .toast{
       position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
       padding:10px 12px;border-radius:999px;
@@ -366,6 +379,7 @@
     }
     .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
 
+    /* Responsive */
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr;min-height:auto}
       .heroLeft h1,.ticker{font-size:44px}
@@ -374,7 +388,7 @@
       .heroRight{display:none}
       .heroBeam,.heroBeamGlow{display:none}
 
-      /* mobile: centered crop */
+      /* mobile crop */
       .heroCard::before{
         background: url("hero.jpg") 60% 50%/cover no-repeat;
         transform: scale(1.02);
@@ -385,7 +399,6 @@
           radial-gradient(900px 520px at 50% 55%, transparent 52%, rgba(0,0,0,.38) 82%);
       }
     }
-
     @media (max-width: 520px){
       .heroLeft h1,.ticker{font-size:38px}
       .btn{min-width:0;flex:1}

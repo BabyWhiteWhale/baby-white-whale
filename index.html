@@ -6,11 +6,23 @@
 <title>Baby White Whale ($BWW)</title>
 
 <!-- FAVICON -->
-<link rel="icon" href="/favicon.ico?v=4" type="image/x-icon">
-<link rel="shortcut icon" href="/favicon.ico?v=4" type="image/x-icon">
-<link rel="icon" sizes="16x16" href="/favicon.ico?v=4">
-<link rel="icon" sizes="32x32" href="/favicon.ico?v=4">
+<link rel="icon" href="/favicon.ico?v=6" type="image/x-icon">
+<link rel="shortcut icon" href="/favicon.ico?v=6" type="image/x-icon">
+<link rel="icon" sizes="16x16" href="/favicon.ico?v=6">
+<link rel="icon" sizes="32x32" href="/favicon.ico?v=6">
 <meta name="theme-color" content="#050b18">
+
+<!-- Open Graph / Twitter Card -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yourdomain.com/">
+<meta property="og:title" content="Baby White Whale ($BWW)">
+<meta property="og:description" content="The deep just had a baby. Join the cosmic rise of $BWW.">
+<meta property="og:image" content="https://yourdomain.com/social-preview.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Baby White Whale ($BWW)">
+<meta name="twitter:description" content="The deep just had a baby. Join the cosmic rise of $BWW.">
+<meta name="twitter:image" content="https://yourdomain.com/social-preview.jpg">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
@@ -24,6 +36,29 @@ body{
   color:white;
   overflow-x:hidden;
   position:relative;
+}
+
+/* Copy CA Button */
+.copy-ca{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:12px 20px;
+  border-radius:30px;
+  background:rgba(10,20,40,.7);
+  border:1px solid rgba(127,223,255,.6);
+  backdrop-filter:blur(12px);
+  color:#7fdfff;
+  font-weight:600;
+  cursor:pointer;
+  z-index:1000;
+  transition:.3s;
+}
+
+.copy-ca:hover{
+  background:rgba(20,40,70,.9);
+  box-shadow:0 0 25px rgba(0,200,255,.8);
+  transform:translateY(-2px);
 }
 
 /* Cosmic overlay */
@@ -101,7 +136,7 @@ body::before{
   position:relative;
 }
 
-/* Whale eye glow */
+/* Whale eye */
 .whale-eye{
   position:absolute;
   top:42%;
@@ -209,6 +244,8 @@ footer{
 
 <body>
 
+<div class="copy-ca" onclick="copyCA()">📋 Copy CA</div>
+
 <div class="nebula"></div>
 
 <div class="intro">
@@ -255,6 +292,13 @@ footer{
 
 <script>
 const CONTRACT="5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump";
+
+function copyCA(){
+  navigator.clipboard.writeText(CONTRACT);
+  const btn=document.querySelector(".copy-ca");
+  btn.innerText="✅ Copied!";
+  setTimeout(()=>{btn.innerText="📋 Copy CA";},1500);
+}
 
 function warpBuy(){
   document.body.style.transition="filter .4s ease";

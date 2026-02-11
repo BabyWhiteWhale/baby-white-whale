@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Baby White Whale ($BWW)</title>
 
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<meta name="theme-color" content="#050b18">
+
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
@@ -19,7 +23,7 @@ body{
   position:relative;
 }
 
-/* Global cosmic overlay */
+/* Cosmic Overlay */
 body::before{
   content:"";
   position:fixed;
@@ -30,7 +34,7 @@ body::before{
   z-index:-2;
 }
 
-/* ===== DRIFTING NEBULA ===== */
+/* Drifting Nebula */
 .nebula{
   position:fixed;
   inset:-20%;
@@ -48,7 +52,7 @@ body::before{
   100%{transform:translateX(5%) translateY(5%);}
 }
 
-/* ===== INTRO ===== */
+/* Intro */
 .intro{
   position:fixed;
   inset:0;
@@ -82,7 +86,7 @@ body::before{
   to{opacity:0; visibility:hidden;}
 }
 
-/* ===== SECTION ===== */
+/* Section Layout */
 .section{
   min-height:100vh;
   padding:120px 20px;
@@ -94,7 +98,7 @@ body::before{
   position:relative;
 }
 
-/* Whale eye glow */
+/* Whale Eye Glow */
 .whale-eye{
   position:absolute;
   top:42%;
@@ -123,6 +127,7 @@ body::before{
 
 .title span{color:#7fdfff;}
 
+/* Price Row */
 .price-row{
   margin-top:40px;
   display:flex;
@@ -140,6 +145,7 @@ body::before{
   min-width:180px;
 }
 
+/* Buy Button */
 .buy-btn{
   padding:18px 40px;
   border-radius:40px;
@@ -157,7 +163,7 @@ body::before{
   box-shadow:0 0 70px rgba(80,200,255,1);
 }
 
-/* Twitter button */
+/* Twitter */
 .twitter-btn{
   margin-top:20px;
   padding:12px 30px;

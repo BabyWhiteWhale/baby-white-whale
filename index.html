@@ -6,10 +6,8 @@
 <title>Baby White Whale ($BWW)</title>
 
 <!-- FAVICON -->
-<link rel="icon" href="/favicon.ico?v=6" type="image/x-icon">
-<link rel="shortcut icon" href="/favicon.ico?v=6" type="image/x-icon">
-<link rel="icon" sizes="16x16" href="/favicon.ico?v=6">
-<link rel="icon" sizes="32x32" href="/favicon.ico?v=6">
+<link rel="icon" href="/favicon.ico?v=7" type="image/x-icon">
+<link rel="shortcut icon" href="/favicon.ico?v=7" type="image/x-icon">
 <meta name="theme-color" content="#050b18">
 
 <!-- Open Graph / Twitter Card -->
@@ -28,7 +26,6 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-
 body{
   font-family:'Montserrat',sans-serif;
   background:url('hero.jpg') center top / cover no-repeat fixed;
@@ -38,41 +35,16 @@ body{
   position:relative;
 }
 
-/* Copy CA Button */
-.copy-ca{
-  position:fixed;
-  top:20px;
-  right:20px;
-  padding:12px 20px;
-  border-radius:30px;
-  background:rgba(10,20,40,.7);
-  border:1px solid rgba(127,223,255,.6);
-  backdrop-filter:blur(12px);
-  color:#7fdfff;
-  font-weight:600;
-  cursor:pointer;
-  z-index:1000;
-  transition:.3s;
-}
-
-.copy-ca:hover{
-  background:rgba(20,40,70,.9);
-  box-shadow:0 0 25px rgba(0,200,255,.8);
-  transform:translateY(-2px);
-}
-
 /* Cosmic overlay */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:
-    radial-gradient(circle at center, rgba(0,140,255,0.25) 0%, rgba(0,0,0,0.6) 70%);
-  pointer-events:none;
-  z-index:-2;
+  background:radial-gradient(circle at center, rgba(0,140,255,0.25) 0%, rgba(0,0,0,0.6) 70%);
+  z-index:-3;
 }
 
-/* Drifting nebula */
+/* Nebula */
 .nebula{
   position:fixed;
   inset:-20%;
@@ -81,13 +53,45 @@ body::before{
     radial-gradient(circle at 70% 60%, rgba(140,0,255,0.25), transparent 60%);
   filter:blur(120px);
   animation:nebulaDrift 60s linear infinite alternate;
-  z-index:-1;
-  pointer-events:none;
+  z-index:-2;
+}
+@keyframes nebulaDrift{
+  0%{transform:translate(-5%,-5%);}
+  100%{transform:translate(5%,5%);}
 }
 
-@keyframes nebulaDrift{
-  0%{transform:translateX(-5%) translateY(-5%);}
-  100%{transform:translateX(5%) translateY(5%);}
+/* Starfield */
+.stars{
+  position:fixed;
+  inset:0;
+  background:transparent url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity:.15;
+  animation:starsMove 120s linear infinite;
+  z-index:-1;
+}
+@keyframes starsMove{
+  from{background-position:0 0;}
+  to{background-position:1000px 1000px;}
+}
+
+/* Copy CA */
+.copy-ca{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:10px 18px;
+  border-radius:30px;
+  background:rgba(10,20,40,.7);
+  border:1px solid rgba(127,223,255,.6);
+  backdrop-filter:blur(12px);
+  color:#7fdfff;
+  font-size:14px;
+  cursor:pointer;
+  z-index:1000;
+  transition:.3s;
+}
+.copy-ca:hover{
+  box-shadow:0 0 20px rgba(0,200,255,.8);
 }
 
 /* Intro */
@@ -99,29 +103,21 @@ body::before{
   justify-content:center;
   align-items:center;
   z-index:9999;
-  animation:introFadeOut 1.5s ease forwards;
-  animation-delay:4s;
+  animation:introFade 1.2s ease forwards;
+  animation-delay:3.5s;
 }
-
 .intro-text{
-  font-size:60px;
+  font-size:50px;
   font-weight:900;
-  letter-spacing:3px;
   color:#7fdfff;
   opacity:0;
-  animation:textReveal 2s ease forwards;
-  animation-delay:1s;
+  animation:introText 1.8s ease forwards;
 }
-
-@keyframes textReveal{
-  to{
-    opacity:1;
-    text-shadow:0 0 50px rgba(0,220,255,1);
-  }
+@keyframes introText{
+  to{opacity:1;text-shadow:0 0 50px #00eaff;}
 }
-
-@keyframes introFadeOut{
-  to{opacity:0; visibility:hidden;}
+@keyframes introFade{
+  to{opacity:0;visibility:hidden;}
 }
 
 /* Sections */
@@ -133,7 +129,6 @@ body::before{
   justify-content:center;
   align-items:center;
   text-align:center;
-  position:relative;
 }
 
 /* Whale eye */
@@ -141,112 +136,99 @@ body::before{
   position:absolute;
   top:42%;
   left:52%;
-  width:22px;
-  height:22px;
-  background:#00c8ff;
+  width:20px;
+  height:20px;
+  background:#00eaff;
   border-radius:50%;
-  filter:blur(5px);
-  animation:eyePulse 3s ease-in-out infinite;
-  pointer-events:none;
+  filter:blur(4px);
+  animation:eyePulse 3s infinite;
 }
-
 @keyframes eyePulse{
-  0%,100%{opacity:0.6; box-shadow:0 0 10px #00c8ff;}
-  50%{opacity:1; box-shadow:0 0 40px #00eaff;}
+  0%,100%{opacity:.6;}
+  50%{opacity:1;box-shadow:0 0 40px #00eaff;}
 }
 
-/* Title */
 .title{
-  font-size:60px;
+  font-size:56px;
   font-weight:900;
-  letter-spacing:2px;
   text-shadow:0 0 30px rgba(0,200,255,.7);
 }
-
 .title span{color:#7fdfff;}
 
-/* Price row */
 .price-row{
   margin-top:40px;
   display:flex;
-  justify-content:center;
   gap:30px;
   flex-wrap:wrap;
+  justify-content:center;
 }
-
 .stat-box{
-  padding:18px 30px;
+  padding:16px 28px;
   border-radius:12px;
   background:rgba(10,20,40,.6);
   border:1px solid rgba(127,223,255,.5);
-  backdrop-filter:blur(12px);
-  min-width:180px;
+  min-width:170px;
 }
 
-/* Buy button */
 .buy-btn{
-  padding:18px 40px;
+  padding:16px 36px;
   border-radius:40px;
   background:linear-gradient(90deg,#7de3ff,#2fb5ff);
   border:none;
-  color:#05111f;
   font-weight:700;
   cursor:pointer;
   box-shadow:0 0 40px rgba(80,200,255,1);
-  transition:.3s;
-}
-
-.buy-btn:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 70px rgba(80,200,255,1);
 }
 
 /* Twitter */
 .twitter-btn{
   margin-top:20px;
-  padding:12px 30px;
+  padding:10px 26px;
   border-radius:30px;
   background:#1DA1F2;
   color:white;
   text-decoration:none;
-  font-weight:600;
-  transition:.3s;
 }
 
-.twitter-btn:hover{
-  background:#0d8ddb;
-}
-
-/* 16:9 Chart */
+/* Chart */
 .chart-wrapper{
   width:95%;
   max-width:1200px;
   aspect-ratio:16/9;
-  border-radius:16px;
+  border-radius:14px;
   overflow:hidden;
-  box-shadow:0 0 80px rgba(80,200,255,.3);
   margin-top:40px;
+  box-shadow:0 0 60px rgba(0,200,255,.3);
 }
-
 .chart-wrapper iframe{
   width:100%;
   height:100%;
   border:0;
 }
 
+/* Footer */
 footer{
-  padding:60px 0;
-  text-align:center;
+  padding:50px 0;
   opacity:.6;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .title{font-size:32px;}
+  .price-row{flex-direction:column;gap:18px;}
+  .stat-box,.buy-btn{width:90%;max-width:320px;}
+  .chart-wrapper{aspect-ratio:16/10;}
+  .intro-text{font-size:30px;}
+  .copy-ca{font-size:12px;padding:6px 12px;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="copy-ca" onclick="copyCA()">📋 Copy CA</div>
-
+<div class="stars"></div>
 <div class="nebula"></div>
+<div class="copy-ca" onclick="copyCA()">📋 5PtE...pump</div>
 
 <div class="intro">
   <div class="intro-text">BABY WHITE WHALE</div>
@@ -254,18 +236,13 @@ footer{
 
 <section class="section">
   <div class="whale-eye"></div>
-
   <div class="title">$<span>BABY</span>WHITEWHALE</div>
 
   <div class="price-row">
     <div class="stat-box">
       PRICE<br><strong id="price">Loading...</strong>
     </div>
-
-    <button class="buy-btn" onclick="warpBuy()">
-      BUY ON JUPITER
-    </button>
-
+    <button class="buy-btn" onclick="warpBuy()">BUY ON JUPITER</button>
     <div class="stat-box">
       MARKET CAP<br><strong id="marketcap">Loading...</strong>
     </div>
@@ -280,8 +257,7 @@ footer{
   <h2 style="color:#7fdfff;">Live Chart</h2>
   <div class="chart-wrapper">
     <iframe 
-      src="https://dexscreener.com/solana/5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump?embed=1&theme=dark&trades=0&info=0"
-      allowfullscreen>
+      src="https://dexscreener.com/solana/5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump?embed=1&theme=dark&trades=0&info=0">
     </iframe>
   </div>
 </section>
@@ -297,34 +273,28 @@ function copyCA(){
   navigator.clipboard.writeText(CONTRACT);
   const btn=document.querySelector(".copy-ca");
   btn.innerText="✅ Copied!";
-  setTimeout(()=>{btn.innerText="📋 Copy CA";},1500);
+  setTimeout(()=>{btn.innerText="📋 5PtE...pump";},1500);
 }
 
 function warpBuy(){
-  document.body.style.transition="filter .4s ease";
+  document.body.style.transition="filter .4s";
   document.body.style.filter="brightness(2)";
   setTimeout(()=>{
-    window.open(
-      'https://jup.ag/swap/SOL-5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump',
-      '_blank'
-    );
+    window.open('https://jup.ag/swap/SOL-'+CONTRACT,'_blank');
     document.body.style.filter="brightness(1)";
   },400);
 }
 
 async function fetchTokenData(){
   try{
-    const response=await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRACT}`);
-    const data=await response.json();
-    if(!data.pairs||data.pairs.length===0)return;
-    const pair=data.pairs[0];
-    document.getElementById("price").innerText=
-      "$"+parseFloat(pair.priceUsd).toFixed(8);
-    document.getElementById("marketcap").innerText=
-      pair.fdv?"$"+Number(pair.fdv).toLocaleString():"$--";
-  }catch(e){console.log(e);}
+    const r=await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRACT}`);
+    const d=await r.json();
+    if(!d.pairs||!d.pairs.length)return;
+    const p=d.pairs[0];
+    price.innerText="$"+parseFloat(p.priceUsd).toFixed(8);
+    marketcap.innerText=p.fdv?"$"+Number(p.fdv).toLocaleString():"$--";
+  }catch(e){}
 }
-
 fetchTokenData();
 setInterval(fetchTokenData,30000);
 </script>

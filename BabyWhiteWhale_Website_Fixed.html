@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baby White Whale — $BWW</title>
+  <style>
+    :root{
+      --gold:#f7d21b;
+      --gold2:#fff078;
+      --deep:#020606;
+      --ink:#061018;
+      --text:#fff5b8;
+      --muted:#b8aa68;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      color:var(--text);
+      background:#010303;
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(247,210,27,.25), transparent 35%),
+        radial-gradient(circle at 85% 20%, rgba(255,235,120,.08), transparent 30%),
+        linear-gradient(180deg,#06151e 0%,#020606 48%,#000 100%);
+      z-index:-3;
+    }
+    .bubbles{
+      position:fixed; inset:0; pointer-events:none; z-index:-1;
+      background-image:
+        radial-gradient(circle,rgba(255,240,120,.22) 1px,transparent 2px),
+        radial-gradient(circle,rgba(255,240,120,.12) 1px,transparent 2px);
+      background-size:80px 80px,130px 130px;
+      animation:rise 22s linear infinite;
+      opacity:.35;
+    }
+    @keyframes rise{from{transform:translateY(0)}to{transform:translateY(-180px)}}
+    .hero{
+      min-height:100vh;
+      position:relative;
+      display:grid;
+      align-items:center;
+      padding:80px 7%;
+      background:
+        linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.45),rgba(0,0,0,.12)),
+        url("hero-banner.png") center/cover no-repeat;
+      overflow:hidden;
+    }
+    .hero:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg,transparent 65%,#010303 100%),
+        radial-gradient(circle at 62% 30%,rgba(247,210,27,.23),transparent 26%);
+    }
+    .hero-content{position:relative;z-index:2;max-width:820px}
+    .badge{
+      display:inline-flex;gap:10px;align-items:center;
+      padding:10px 16px;border:1px solid rgba(247,210,27,.45);
+      border-radius:999px;background:rgba(0,0,0,.42);
+      color:var(--gold2);font-size:12px;font-weight:900;
+      letter-spacing:.14em;text-transform:uppercase;
+      box-shadow:0 0 28px rgba(247,210,27,.14);
+    }
+    h1{
+      margin:24px 0 20px;
+      font-size:clamp(54px,9vw,128px);
+      line-height:.85;
+      letter-spacing:-.07em;
+      text-transform:uppercase;
+      text-shadow:0 0 36px rgba(247,210,27,.35);
+    }
+    h1 span{color:var(--gold)}
+    .subtitle{
+      font-size:clamp(18px,2.2vw,29px);
+      line-height:1.35;
+      color:#fff6c9;
+      max-width:760px;
+      margin-bottom:34px;
+    }
+    .actions{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{
+      padding:16px 24px;border-radius:16px;
+      text-decoration:none;font-weight:950;letter-spacing:.03em;
+      transition:.22s ease;
+    }
+    .btn:hover{transform:translateY(-3px)}
+    .primary{background:linear-gradient(135deg,var(--gold),#fff58d);color:#111;box-shadow:0 0 34px rgba(247,210,27,.34)}
+    .ghost{border:1px solid rgba(247,210,27,.45);color:var(--gold2);background:rgba(0,0,0,.36)}
+    section{padding:110px 7%;max-width:1380px;margin:0 auto}
+    .eyebrow{color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.18em;font-weight:950}
+    .title{font-size:clamp(36px,5.6vw,78px);line-height:.95;letter-spacing:-.05em;margin:12px 0 20px;color:#fff2a1}
+    .copy{color:var(--muted);font-size:18px;line-height:1.75;max-width:860px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+    .card{
+      min-height:230px;
+      padding:30px;border-radius:28px;
+      border:1px solid rgba(247,210,27,.22);
+      background:
+        radial-gradient(circle at 20% 0%,rgba(247,210,27,.15),transparent 35%),
+        linear-gradient(180deg,rgba(255,219,48,.06),rgba(0,0,0,.44));
+      box-shadow:inset 0 0 34px rgba(247,210,27,.04),0 20px 70px rgba(0,0,0,.28);
+    }
+    .card h3{font-size:28px;color:var(--gold);margin:0 0 16px}
+    .card p{color:var(--muted);line-height:1.65}
+    .lore{
+      border-radius:36px;
+      padding:46px;
+      border:1px solid rgba(247,210,27,.25);
+      background:
+        linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.35)),
+        url("hero-banner.png") center/cover no-repeat;
+      box-shadow:0 0 80px rgba(247,210,27,.08);
+    }
+    .token-panel,.chart-wrap{
+      border:1px solid rgba(247,210,27,.35);
+      background:rgba(0,0,0,.52);
+      border-radius:28px;
+      padding:24px;
+      box-shadow:0 0 60px rgba(247,210,27,.08);
+      margin-top:36px;
+    }
+    .token-row{
+      display:grid;grid-template-columns:150px 1fr auto;gap:16px;
+      align-items:center;padding:18px 0;border-bottom:1px solid rgba(247,210,27,.14)
+    }
+    .token-row:last-child{border-bottom:0}
+    .token-row span{color:var(--muted);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:900}
+    .token-row strong,.token-row code{color:#fff1a1}
+    .token-row code{word-break:break-all;font-family:monospace}
+    .copy-btn{border:0;border-radius:999px;padding:11px 16px;font-weight:950;background:linear-gradient(135deg,var(--gold),#fff58d);color:#111;cursor:pointer}
+    iframe{width:100%;height:640px;border:0;border-radius:18px;display:block;background:#000}
+    .quote{
+      text-align:center;padding:100px 7%;
+      font-size:clamp(28px,5vw,72px);
+      line-height:1.05;letter-spacing:-.05em;
+      color:#fff2a1;
+      text-shadow:0 0 30px rgba(247,210,27,.22);
+    }
+    footer{padding:48px 7%;text-align:center;color:var(--muted);border-top:1px solid rgba(247,210,27,.16);background:#000}
+    @media(max-width:850px){
+      .cards{grid-template-columns:1fr}
+      .token-row{grid-template-columns:1fr}
+      iframe{height:520px}
+    }
+  </style>
+</head>
+<body>
+  <div class="bubbles"></div>
+
+  <main class="hero">
+    <div class="hero-content">
+      <div class="badge">Golden trenches · Yellow wave · $BWW</div>
+      <h1>Baby White Whale <span>Army</span></h1>
+      <p class="subtitle">
+        From the trenches, the yellow tide rises. A golden army built on pressure,
+        conviction and community.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="#chart">View Chart</a>
+        <a class="btn primary" href="https://dexscreener.com/robinhood/0x18a0a025892c61754126225eb7c58562fa23a4ba" target="_blank">Buy $BWW</a>
+        <a class="btn ghost" href="https://x.com/BabyWhiteWhale_" target="_blank">Follow on X</a>
+      </div>
+    </div>
+  </main>
+
+  <section>
+    <div class="eyebrow">The mission</div>
+    <h2 class="title">Different trenches. Same ocean. Same mission.</h2>
+    <p class="copy">
+      While others fight, we unite. Baby White Whale leads the yellow wave from deep below the surface.
+      No panic. No division. Just a community moving as one tide.
+    </p>
+    <div class="cards">
+      <div class="card"><h3>United</h3><p>Crypto trenches united under one golden tide. Frens, builders and believers moving together.</p></div>
+      <div class="card"><h3>Relentless</h3><p>The deep rewards consistency. We grind, build and position while the surface makes noise.</p></div>
+      <div class="card"><h3>Golden</h3><p>A cinematic yellow/gold identity made to stand out across X, charts and the website.</p></div>
+    
+      <div style="text-align:center;margin-top:20px">
+        <a class="btn primary"
+           href="https://dexscreener.com/robinhood/0x18a0a025892c61754126225eb7c58562fa23a4ba"
+           target="_blank" rel="noopener">
+           Open Live DexScreener Chart
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="lore">
+      <div class="eyebrow">Lore</div>
+      <h2 class="title">From the trenches, we rise.</h2>
+      <p class="copy">
+        Born in pressure. Forged in the deep. Baby White Whale does not chase waves —
+        he gathers the army and becomes the tide.
+      </p>
+    </div>
+  </section>
+
+  <section id="token">
+    <div class="eyebrow">Token</div>
+    <h2 class="title">Track the yellow wave.</h2>
+    <p class="copy">Add the live contract and pair address when the coin is launched.</p>
+    <div class="token-panel">
+      <div class="token-row"><span>Network</span><strong>Robinhood Chain</strong></div>
+      <div class="token-row"><span>Ticker</span><strong>$BWW</strong></div>
+      <div class="token-row"><span>X</span><strong>@BabyWhiteWhale_</strong></div>
+      <div class="token-row"><span>Contract</span><code id="contractAddress">0x86a061784f081559847e46630e9ba6acf39da445</code><button class="copy-btn" onclick="copyContract()">Copy</button></div>
+    </div>
+  </section>
+
+  <section id="chart">
+    <div class="eyebrow">Live chart</div>
+    <h2 class="title">Dexscreener</h2>
+    <p class="copy">Live DexScreener chart for Baby White Whale.</p>
+    <div class="chart-wrap">
+      <iframe src="https://dexscreener.com/robinhood/0x18a0a025892c61754126225eb7c58562fa23a4ba?embed=1&theme=dark" title="Baby White Whale Dexscreener Chart" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <div class="quote">
+    The surface divides.<br />
+    The deep connects. 🌊
+  </div>
+
+  <footer>
+    Baby White Whale · Built deep · Follow <a style="color:#f7d21b" href="https://x.com/BabyWhiteWhale_" target="_blank">@BabyWhiteWhale_</a>
+  </footer>
+
+  <script>
+    function copyContract(){
+      const value=document.getElementById("contractAddress").innerText.trim();
+      navigator.clipboard.writeText(value);
+      const btn=document.querySelector(".copy-btn");
+      const old=btn.innerText;
+      btn.innerText="Copied";
+      setTimeout(()=>btn.innerText=old,1200);
+    }
+  </script>
+</body>
+</html>

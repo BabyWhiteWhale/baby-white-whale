@@ -1,303 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Baby White Whale ($BWW)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baby White Whale</title>
+  <style>
+    :root {
+      --gold: #f7d21b;
+      --gold-soft: #ffe76a;
+      --deep: #020606;
+      --blue: #061826;
+      --text: #fff8c9;
+      --muted: #b7aa6a;
+    }
 
-<!-- FAVICON -->
-<link rel="icon" href="/favicon.ico?v=7" type="image/x-icon">
-<link rel="shortcut icon" href="/favicon.ico?v=7" type="image/x-icon">
-<meta name="theme-color" content="#050b18">
+    * { box-sizing: border-box; }
 
-<!-- Open Graph / Twitter Card -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://yourdomain.com/">
-<meta property="og:title" content="Baby White Whale ($BWW)">
-<meta property="og:description" content="The deep just had a baby. Join the cosmic rise of $BWW.">
-<meta property="og:image" content="https://yourdomain.com/social-preview.jpg">
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(247,210,27,.28), transparent 35%),
+        linear-gradient(180deg, #07131b 0%, #020606 55%, #000 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Baby White Whale ($BWW)">
-<meta name="twitter:description" content="The deep just had a baby. Join the cosmic rise of $BWW.">
-<meta name="twitter:image" content="https://yourdomain.com/social-preview.jpg">
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 80px 8%;
+      background-image:
+        linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 45%, rgba(0,0,0,.15) 100%),
+        url("hero-banner.png");
+      background-size: cover;
+      background-position: center;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 60% 20%, rgba(255,230,80,.22), transparent 30%);
+      pointer-events: none;
+    }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:'Montserrat',sans-serif;
-  background:url('hero.jpg') center top / cover no-repeat fixed;
-  background-color:#050b18;
-  color:white;
-  overflow-x:hidden;
-  position:relative;
-}
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
 
-/* Cosmic overlay */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle at center, rgba(0,140,255,0.25) 0%, rgba(0,0,0,0.6) 70%);
-  z-index:-3;
-}
+    .badge {
+      display: inline-block;
+      padding: 10px 16px;
+      border: 1px solid rgba(247,210,27,.45);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      background: rgba(0,0,0,.45);
+      letter-spacing: .12em;
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
 
-/* Nebula */
-.nebula{
-  position:fixed;
-  inset:-20%;
-  background:
-    radial-gradient(circle at 30% 40%, rgba(0,160,255,0.35), transparent 60%),
-    radial-gradient(circle at 70% 60%, rgba(140,0,255,0.25), transparent 60%);
-  filter:blur(120px);
-  animation:nebulaDrift 60s linear infinite alternate;
-  z-index:-2;
-}
-@keyframes nebulaDrift{
-  0%{transform:translate(-5%,-5%);}
-  100%{transform:translate(5%,5%);}
-}
+    h1 {
+      font-size: clamp(48px, 8vw, 112px);
+      line-height: .88;
+      margin: 0 0 24px;
+      text-transform: uppercase;
+      letter-spacing: -0.06em;
+      color: #fff4a3;
+      text-shadow: 0 0 24px rgba(247,210,27,.35);
+    }
 
-/* Starfield */
-.stars{
-  position:fixed;
-  inset:0;
-  background:transparent url("https://www.transparenttextures.com/patterns/stardust.png");
-  opacity:.15;
-  animation:starsMove 120s linear infinite;
-  z-index:-1;
-}
-@keyframes starsMove{
-  from{background-position:0 0;}
-  to{background-position:1000px 1000px;}
-}
+    .ticker {
+      color: var(--gold);
+    }
 
-/* Copy CA */
-.copy-ca{
-  position:fixed;
-  top:20px;
-  right:20px;
-  padding:10px 18px;
-  border-radius:30px;
-  background:rgba(10,20,40,.7);
-  border:1px solid rgba(127,223,255,.6);
-  backdrop-filter:blur(12px);
-  color:#7fdfff;
-  font-size:14px;
-  cursor:pointer;
-  z-index:1000;
-  transition:.3s;
-}
-.copy-ca:hover{
-  box-shadow:0 0 20px rgba(0,200,255,.8);
-}
+    .subtitle {
+      font-size: clamp(18px, 2vw, 28px);
+      line-height: 1.35;
+      color: #fff8d7;
+      max-width: 660px;
+      margin-bottom: 36px;
+    }
 
-/* Intro */
-.intro{
-  position:fixed;
-  inset:0;
-  background:#050b18;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  animation:introFade 1.2s ease forwards;
-  animation-delay:3.5s;
-}
-.intro-text{
-  font-size:50px;
-  font-weight:900;
-  color:#7fdfff;
-  opacity:0;
-  animation:introText 1.8s ease forwards;
-}
-@keyframes introText{
-  to{opacity:1;text-shadow:0 0 50px #00eaff;}
-}
-@keyframes introFade{
-  to{opacity:0;visibility:hidden;}
-}
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
 
-/* Sections */
-.section{
-  min-height:100vh;
-  padding:120px 20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
+    .btn {
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 14px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      transition: .2s ease;
+    }
 
-/* Whale eye */
-.whale-eye{
-  position:absolute;
-  top:42%;
-  left:52%;
-  width:20px;
-  height:20px;
-  background:#00eaff;
-  border-radius:50%;
-  filter:blur(4px);
-  animation:eyePulse 3s infinite;
-}
-@keyframes eyePulse{
-  0%,100%{opacity:.6;}
-  50%{opacity:1;box-shadow:0 0 40px #00eaff;}
-}
+    .primary {
+      background: linear-gradient(135deg, var(--gold), #fff07a);
+      color: #111;
+      box-shadow: 0 0 32px rgba(247,210,27,.35);
+    }
 
-.title{
-  font-size:56px;
-  font-weight:900;
-  text-shadow:0 0 30px rgba(0,200,255,.7);
-}
-.title span{color:#7fdfff;}
+    .secondary {
+      border: 1px solid rgba(247,210,27,.5);
+      color: var(--gold-soft);
+      background: rgba(0,0,0,.35);
+    }
 
-.price-row{
-  margin-top:40px;
-  display:flex;
-  gap:30px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.stat-box{
-  padding:16px 28px;
-  border-radius:12px;
-  background:rgba(10,20,40,.6);
-  border:1px solid rgba(127,223,255,.5);
-  min-width:170px;
-}
+    .btn:hover { transform: translateY(-2px); }
 
-.buy-btn{
-  padding:16px 36px;
-  border-radius:40px;
-  background:linear-gradient(90deg,#7de3ff,#2fb5ff);
-  border:none;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 0 40px rgba(80,200,255,1);
-}
+    section {
+      padding: 90px 8%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
 
-/* Twitter */
-.twitter-btn{
-  margin-top:20px;
-  padding:10px 26px;
-  border-radius:30px;
-  background:#1DA1F2;
-  color:white;
-  text-decoration:none;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
 
-/* Chart */
-.chart-wrapper{
-  width:95%;
-  max-width:1200px;
-  aspect-ratio:16/9;
-  border-radius:14px;
-  overflow:hidden;
-  margin-top:40px;
-  box-shadow:0 0 60px rgba(0,200,255,.3);
-}
-.chart-wrapper iframe{
-  width:100%;
-  height:100%;
-  border:0;
-}
+    .card {
+      border: 1px solid rgba(247,210,27,.22);
+      background: linear-gradient(180deg, rgba(255,220,50,.08), rgba(0,0,0,.35));
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: inset 0 0 30px rgba(247,210,27,.04);
+    }
 
-/* Footer */
-footer{
-  padding:50px 0;
-  opacity:.6;
-}
+    .card h3 {
+      color: var(--gold);
+      margin-top: 0;
+      font-size: 24px;
+    }
 
-/* Mobile */
-@media(max-width:768px){
-  .title{font-size:32px;}
-  .price-row{flex-direction:column;gap:18px;}
-  .stat-box,.buy-btn{width:90%;max-width:320px;}
-  .chart-wrapper{aspect-ratio:16/10;}
-  .intro-text{font-size:30px;}
-  .copy-ca{font-size:12px;padding:6px 12px;}
-}
-</style>
+    .card p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: clamp(34px, 5vw, 64px);
+      margin: 0 0 20px;
+      color: #fff4a3;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 820px;
+      line-height: 1.7;
+      margin-bottom: 42px;
+    }
+
+    .contract {
+      border: 1px solid rgba(247,210,27,.35);
+      background: rgba(0,0,0,.42);
+      border-radius: 18px;
+      padding: 20px;
+      color: var(--gold-soft);
+      word-break: break-all;
+      font-family: monospace;
+    }
+
+    footer {
+      padding: 44px 8%;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid rgba(247,210,27,.15);
+      background: #010303;
+    }
+
+
+    .social-strip {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    .social-pill {
+      text-decoration: none;
+      color: #111;
+      background: linear-gradient(135deg, var(--gold), #fff07a);
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      box-shadow: 0 0 24px rgba(247,210,27,.28);
+    }
+
+    .chart-wrap {
+      border: 1px solid rgba(247,210,27,.35);
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(0,0,0,.55);
+      box-shadow: 0 0 42px rgba(247,210,27,.08);
+    }
+
+    .chart-wrap iframe {
+      width: 100%;
+      height: 640px;
+      border: 0;
+      display: block;
+    }
+
+    @media (max-width: 800px) {
+      .hero { padding: 64px 6%; background-position: center; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-
 <body>
-
-<div class="stars"></div>
-<div class="nebula"></div>
-<div class="copy-ca" onclick="copyCA()">📋 5PtE...pump</div>
-
-<div class="intro">
-  <div class="intro-text">BABY WHITE WHALE</div>
-</div>
-
-<section class="section">
-  <div class="whale-eye"></div>
-  <div class="title">$<span>BABY</span>WHITEWHALE</div>
-
-  <div class="price-row">
-    <div class="stat-box">
-      PRICE<br><strong id="price">Loading...</strong>
+  <main class="hero">
+    <div class="content">
+      <div class="badge">From the trenches · Into the tide</div>
+      <h1>Baby White Whale <span class="ticker">$BWW</span></h1>
+      <p class="subtitle">
+        A golden army rising from the deep. Built in pressure, powered by community,
+        and moving as one ocean.
+      </p>
+      <div class="buttons">
+        <a class="btn primary" href="#" target="_blank">Buy $BWW</a>
+        <a class="btn secondary" href="https://x.com/BabyWhiteWhale_" target="_blank">Join X</a>
+      </div>
     </div>
-    <button class="buy-btn" onclick="warpBuy()">BUY ON JUPITER</button>
-    <div class="stat-box">
-      MARKET CAP<br><strong id="marketcap">Loading...</strong>
+  </main>
+
+  <section>
+    <h2 class="section-title">The Deep Moves Together</h2>
+    <p class="section-copy">
+      While others fight, we unite. Different trenches. Same ocean. Same mission.
+      Baby White Whale leads the yellow wave from the depths.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>One Ocean</h3>
+        <p>No noise. No division. Just a united trench community moving under the same tide.</p>
+      </div>
+      <div class="card">
+        <h3>One Mission</h3>
+        <p>Build presence, grow the army, and bring Baby White Whale from the depths to the surface.</p>
+      </div>
+      <div class="card">
+        <h3>One Wave</h3>
+        <p>The yellow/gold wave has started. The deep rewards patience, consistency and conviction.</p>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <a class="twitter-btn" href="https://x.com/babywhitewhale_" target="_blank">
-    Follow on X
-  </a>
-</section>
+  <section>
+    <h2 class="section-title">Token</h2>
+    <p class="section-copy">
+      Add your contract address below when ready. Keep this section clean, simple and direct.
+    </p>
+    <div class="contract">CONTRACT_ADDRESS_HERE</div>
+  </section>
 
-<section class="section">
-  <h2 style="color:#7fdfff;">Live Chart</h2>
-  <div class="chart-wrapper">
-    <iframe 
-      src="https://dexscreener.com/solana/5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump?embed=1&theme=dark&trades=0&info=0">
-    </iframe>
-  </div>
-</section>
 
-<footer>
-  2026 Baby White Whale — Not financial advice.
-</footer>
+  <section>
+    <h2 class="section-title">Join the Army</h2>
+    <p class="section-copy">
+      Follow the movement on X and ride with Baby White Whale from the trenches into the yellow wave.
+    </p>
+    <div class="social-strip">
+      <a class="social-pill" href="https://x.com/BabyWhiteWhale_" target="_blank">Follow on X</a>
+      <a class="social-pill" href="https://dexscreener.com/solana/YOUR_PAIR_ADDRESS" target="_blank">View chart</a>
+    </div>
+  </section>
 
-<script>
-const CONTRACT="5PtEXR4SzTLhc3ztx2Q2mu5m18e3rHW2rYEhQbbvpump";
+  <section>
+    <h2 class="section-title">Live Chart</h2>
+    <p class="section-copy">
+      Track the $BWW chart live on Dexscreener.
+    </p>
+    <div class="chart-wrap">
+      <iframe
+        src="https://dexscreener.com/solana/YOUR_PAIR_ADDRESS?embed=1&theme=dark"
+        title="Baby White Whale Dexscreener Chart"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
 
-function copyCA(){
-  navigator.clipboard.writeText(CONTRACT);
-  const btn=document.querySelector(".copy-ca");
-  btn.innerText="✅ Copied!";
-  setTimeout(()=>{btn.innerText="📋 5PtE...pump";},1500);
-}
-
-function warpBuy(){
-  document.body.style.transition="filter .4s";
-  document.body.style.filter="brightness(2)";
-  setTimeout(()=>{
-    window.open('https://jup.ag/swap/SOL-'+CONTRACT,'_blank');
-    document.body.style.filter="brightness(1)";
-  },400);
-}
-
-async function fetchTokenData(){
-  try{
-    const r=await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRACT}`);
-    const d=await r.json();
-    if(!d.pairs||!d.pairs.length)return;
-    const p=d.pairs[0];
-    price.innerText="$"+parseFloat(p.priceUsd).toFixed(8);
-    marketcap.innerText=p.fdv?"$"+Number(p.fdv).toLocaleString():"$--";
-  }catch(e){}
-}
-fetchTokenData();
-setInterval(fetchTokenData,30000);
-</script>
-
+  <footer>
+    Baby White Whale · Built different. Built deep. 🌊
+  </footer>
 </body>
 </html>
